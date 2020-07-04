@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import './directory.styles.scss'
-import MenuItem from '../menu-item/menu-item.component'
+import "./directory.styles.scss";
+import MenuItem from "../menu-item/menu-item.component";
 
 export default class Directory extends Component {
   //precisa armazenar o estado, por isso Component
@@ -47,12 +47,13 @@ export default class Directory extends Component {
   }
 
   render() {
-    return <div className="directory-menu">
-    
-        {this.state.sections.map(({title, imageUrl, id, size}) => (
-            <MenuItem key={id} title={title} imageUrl={imageUrl} size={size} ></MenuItem>
+    return (
+      <div className="directory-menu">
+        {/* ...otherSectionProps substitui colocar varios atributos */}
+        {this.state.sections.map(({ id, ...otherSectionProps }) => (
+          <MenuItem key={id} {...otherSectionProps}></MenuItem>
         ))}
-    
-    </div>;
+      </div>
+    );
   }
 }

@@ -1,12 +1,14 @@
 import React from "react";
 import "./header.styles.scss";
 import { Link } from "react-router-dom";
-import {connect} from 'react-redux'
+import { connect } from "react-redux";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { auth } from "../../firebase/firebase.utils";
+import CartIcon from "../cart-icon/cart-icon.component";
+import CartDropdown from "../cart-dropdown/cart-dropdown.component";
 
-const Header = ({ currentUser }) => {
- // console.log(currentUser)
+const Header = ({ currentUser, hidden }) => {
+  // console.log(currentUser)
   return (
     <div className="header">
       <Link className="logo-container" to="#">
@@ -30,12 +32,22 @@ const Header = ({ currentUser }) => {
             SIGN IN
           </Link>
         )}
+        <CartIcon />
       </div>
+      { hidden ? null : <CartDropdown /> }
+      
     </div>
   );
 };
-
+/*
  const mapStateToProps = (state) =>({
   currentUser: state.user.currentUser
- })
-export default connect(mapStateToProps) (Header)
+ })*/
+
+//Pega o 'currentUser' de 'user', pega 'hidden'de 'cart'
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+  currentUser,
+  hidden
+});
+
+export default connect(mapStateToProps)(Header);

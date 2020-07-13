@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 //import { hot } from "react-hot-loader";
-import { Homepage } from "./pages/homepage.component";
+import { Homepage } from "./pages/homepage/homepage.component";
 import { Switch, Route, Redirect } from "react-router-dom";
 import ShopPage from "./components/shop/shop.component";
 import Header from "./components/header/header.component";

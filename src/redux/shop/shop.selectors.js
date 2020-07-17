@@ -9,13 +9,15 @@ export const selectCollections = createSelector(
 
 export const selectCollectionsForPreview = createSelector(
   [selectCollections],
-  collections => Object.keys(collections).map(key => collections[key]) //pega as keys de um objeto e no map gera 1array
+  collections => collections 
+  ? Object.keys(collections).map(key => collections[key]) //pega as keys de um objeto e no map gera 1array
+  : []
 );
 
 export const selectCollection = collectionUrlParam =>
   createSelector(
     [selectCollections],
-    collections => collections[collectionUrlParam]
+    collections => (collections ? collections[collectionUrlParam] : null)
   );
 
 /**LESSON 137

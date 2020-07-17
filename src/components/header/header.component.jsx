@@ -6,41 +6,46 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 import { auth } from "../../firebase/firebase.utils";
 import CartIcon from "../cart-icon/cart-icon.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
-import {createStructuredSelector} from 'reselect'
+import { createStructuredSelector } from "reselect";
 import { selectCarHidden } from "../../redux/cart/cart.selectors";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
+import {
+  HeaderContainer,
+  LogoContainer,
+  OptionsContainer,
+  OptionDiv,
+  OptionLink
+} from "./header.styles";
 
 const Header = ({ currentUser, hidden }) => {
- 
   // console.log(currentUser)
   return (
-    <div className="header">
-      <Link className="logo-container" to="#">
+    <HeaderContainer>
+      <LogoContainer to="#">
         <Logo className="logo" />
-      </Link>
+      </LogoContainer>
 
-      <div className="options">
-        <Link className="option" to="/shop">
+      <OptionsContainer>
+        <OptionLink to="/shop">
           SHOP
-        </Link>
-        <Link className="option" to="/shop">
+        </OptionLink>
+        <OptionLink to="/shop">
           CONTACT
-        </Link>
+        </OptionLink>
 
         {currentUser ? (
-          <div className="option" onClick={() => auth.signOut()}>
+          <OptionDiv onClick={() => auth.signOut()}>
             SIGN OUT
-          </div>
+          </OptionDiv>
         ) : (
           <Link className="option" to="/signIn">
             SIGN IN
           </Link>
         )}
         <CartIcon />
-      </div>
-      { hidden ? null : <CartDropdown /> }
-      
-    </div>
+      </OptionsContainer>
+      {hidden ? null : <CartDropdown />}
+    </HeaderContainer>
   );
 };
 /*
@@ -54,9 +59,9 @@ const Header = ({ currentUser, hidden }) => {
   hidden
 });
 */
-const mapStateToProps = createStructuredSelector ({
-  currentUser: selectCurrentUser ,
-  hidden: selectCarHidden 
-})
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  hidden: selectCarHidden
+});
 
 export default connect(mapStateToProps)(Header);

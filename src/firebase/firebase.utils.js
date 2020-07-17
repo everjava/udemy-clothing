@@ -13,10 +13,15 @@ var firebaseConfig = {
 };
 
 export const createUserProfileDocument = async (userAuth, additionalData) => {
-
   if (!userAuth) return;
 
   const userRef = firestore.doc(`users/${userAuth.uid}`);
+
+  /*teste lesson
+  const collectionRef = firestore.collection('users')
+  const collectionSnapshot = await collectionRef.get();
+  console.log({collection : collectionSnapshot.docs.map(doc => doc.data())});
+  */
 
   const snapShot = await userRef.get();
 
@@ -35,11 +40,32 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
       console.error("Error creating user: " + error.message);
     }
   }
-  
+
   return userRef;
 };
 
 firebase.initializeApp(firebaseConfig);
+
+export const convertCollectionsSnapshotToMap = collections => {
+
+  const transformedCollection = collections.docs.map(doc => {
+    const { title, items } = doc.data();
+    return {
+      routerName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items
+    };
+  });
+   
+  //@TODO lesson 168
+ return transformedCollection.reduce( ( accumulator, collection ) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator
+  }, {} )
+
+
+};
 
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();

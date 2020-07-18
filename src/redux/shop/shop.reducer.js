@@ -1,11 +1,11 @@
 import ShopActionTypes from "./shop.types";
  
 
-/*
+
 const INITIAL_STATE = {
   collections: null,
   isFetching: false,
-  errorMessage: undefined
+  errorMessage: undefined//ou ''
 };
 
 const shopReducer = (state = INITIAL_STATE, action) => {
@@ -33,10 +33,9 @@ const shopReducer = (state = INITIAL_STATE, action) => {
 };
 
 export default shopReducer;
-*/
 
  
-
+/*
 const INITIAL_STATE = {
   collections: null
 };
@@ -56,4 +55,4 @@ const shopReducer = (state = INITIAL_STATE, action) => {
 };
 
 export default shopReducer;
- 
+ */

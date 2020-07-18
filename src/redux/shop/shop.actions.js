@@ -1,3 +1,6 @@
+/**
+ * lesson 175
+ */
 import ShopActionTypes from "./shop.types";
 
 import {
